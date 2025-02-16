@@ -17,7 +17,6 @@ public abstract class CommandRoot extends CommandNode implements TabExecutor {
                 new BookCommand(),
                 new CheckCommand(),
                 new CollectCommand(),
-                new GuideCommand(),
                 new McolCommand(),
                 new RankingCommand()
         );

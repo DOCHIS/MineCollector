@@ -9,6 +9,7 @@ import com.doubledeltas.minecollector.data.GameData;
 import com.doubledeltas.minecollector.data.GameStatistics;
 import com.doubledeltas.minecollector.util.MessageUtil;
 import com.doubledeltas.minecollector.util.SoundUtil;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -17,7 +18,6 @@ import java.util.List;
 import java.util.function.Function;
 
 public final class RankingCommand extends CommandRoot {
-
     public RankingCommand() {
         this.subcommands = List.of(new RankingItemCommand());
     }
@@ -79,10 +79,25 @@ public final class RankingCommand extends CommandRoot {
         else {
             for (int i=1; i < top10Size; i++) {
                 GameData data = top10.get(i);
+                String playerName = data.getName();
+                Player player = MineCollector.getInstance().getServer().getPlayer(playerName);
+                if (player == null) {
+                    // 오프라인 플레이어인 경우
+                    OfflinePlayer offlinePlayer = MineCollector.getInstance().getServer().getOfflinePlayer(playerName);
+                    if (offlinePlayer != null) {
+                        String displayName = offlinePlayer.getName();
+                        if (displayName != null) {
+                            playerName = displayName;
+                        }
+                    }
+                } else {
+                    // 온라인 플레이어인 경우
+                    playerName = player.getDisplayName();
+                }
                 MessageUtil.send(sender,
                         " §7- "
                         + ((i < 10) ? "§70" : "")
-                        + "§e%s. §f%s§7: §e§l%.1f".formatted(i, data.getName(), keyFunc.apply(data))
+                        + "§e%s. §f%s§7: §e§l%.1f".formatted(i, playerName, keyFunc.apply(data))
                 );
             }
         }

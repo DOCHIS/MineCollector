@@ -19,13 +19,10 @@ commands:
     description: 아이템을 몇 개 수집했는지 체크합니다.
   도감:
     aliases: [ehrka, book, getbook]
-    description: 도감을 얻습니다.
+    description: 도감을 얻거나 다른 플레이어에게 지급합니다.
+    permission: minecollector.book
+    usage: /도감 [플레이어]
 #    permission: minecollector.collect
   랭킹:
     aliases: [fodzld, ranking, rank]
     description: 수집 점수 랭킹을 봅니다.
-#    permission: minecollector.ranking
-  가이드:
-    aliases: [rkdlem, guide, 도움, ehdna, help, 도움말]
-    description: 마인콜렉터 가이드를 봅니다.
-#    permission: minecollector.guide

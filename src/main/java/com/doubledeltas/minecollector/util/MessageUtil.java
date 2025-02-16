@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 
 public class MessageUtil {
-    public static String MSG_PREFIX = "§8[ §a마인§f콜렉터 §8]§f ";
+    public static String MSG_PREFIX = "§l§fAGARI 월드 │ ";
     public static BaseComponent MSG_PREFIX_COMPONENT = new TextComponent(MSG_PREFIX);
 
     /**
@@ -41,7 +41,7 @@ public class MessageUtil {
      * @param msg 메시지
      */
     public static void send(CommandSender subject, String msg) {
-        subject.sendMessage(MSG_PREFIX + msg);
+        subject.sendMessage(MSG_PREFIX + msg + "§r");
     }
 
     /**
