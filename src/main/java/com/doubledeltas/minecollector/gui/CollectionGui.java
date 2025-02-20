@@ -49,7 +49,11 @@ public class CollectionGui extends Gui {
                     int quo = amount / 64;
                     int rem = amount % 64;
                     int lv = data.getLevel(material);
-                    ItemBuilder builder = new ItemBuilder(material, lv)
+                    
+                    Material displayMaterial = Material.STRUCTURE_VOID;
+                    ItemBuilder builder = new ItemBuilder(displayMaterial, lv)
+                            .lore("§a수집 완료!")
+                            .lore("")
                             .lore((quo > 0) ?
                                     "§7수집된 개수: %d셋 %d개".formatted(quo, rem) :
                                     "§7수집된 개수: %d개".formatted(rem)

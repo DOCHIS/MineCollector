@@ -8,6 +8,7 @@ import java.io.*;
 import java.util.*;
 import java.util.function.Function;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 /**
  * 데이터 매니저 클래스
@@ -141,5 +142,25 @@ public class DataManager {
                         .toList()
         );
         return top10;
+    }
+
+    public static List<GameData> getTop100(java.util.function.Function<GameData, Float> keyFunc) {
+        return playerData.values().stream()
+                .sorted(Comparator.comparing(keyFunc).reversed())
+                .limit(100)
+                .collect(Collectors.toList());
+    }
+
+    public static void updateDisplayName(Player player) {
+        GameData data = getData(player);
+        if (data != null) {
+            data.setDisplayName(player.getDisplayName());
+            save(data);
+        }
+    }
+
+    public static String getDisplayName(UUID uuid) {
+        GameData data = playerData.get(uuid);
+        return data != null ? data.getDisplayName() : null;
     }
 }

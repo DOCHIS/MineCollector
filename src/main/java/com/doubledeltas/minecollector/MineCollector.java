@@ -10,7 +10,9 @@ import com.doubledeltas.minecollector.event.EventManager;
 import com.doubledeltas.minecollector.item.ItemManager;
 import com.doubledeltas.minecollector.item.manager.InlineItemManager;
 import com.doubledeltas.minecollector.util.MessageUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import com.doubledeltas.minecollector.placeholder.MineCollectorExpansion;
 
 import java.util.logging.Level;
 
@@ -37,6 +39,12 @@ public final class MineCollector extends JavaPlugin {
             e.printStackTrace();
         }
         DataAutoSaver.start();
+                
+        // PlaceholderAPI 등록
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new MineCollectorExpansion().register();
+        }
+
         MessageUtil.log(Level.INFO, "마인콜렉터 플러그인이 켜졌습니다!");
     }
 

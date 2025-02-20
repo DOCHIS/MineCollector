@@ -21,6 +21,7 @@ public class GameData {
     private static final DumperOptions DUMPER_OPTIONS = new DumperOptions();
 
     private String name;
+    private String displayName;
     private UUID uuid;
     private Map<String, Integer> collection;
     private Map<AdvancementDisplayType, Integer> advCleared;
@@ -49,6 +50,7 @@ public class GameData {
      */
     public GameData(Map map) {
         this.name = (String) map.get("name");
+        this.displayName = (String) map.get("display_name");
         this.uuid = UUID.fromString((String) map.get("uuid"));
         this.collection = (Map<String, Integer>) map.get("collection");
         this.advCleared = new LinkedHashMap<>();
@@ -65,6 +67,7 @@ public class GameData {
     public Map<String, Object> toMap() {
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("name", name);
+        map.put("display_name", displayName);
         map.put("uuid", uuid.toString());
         map.put("collection", collection);
 
@@ -199,4 +202,7 @@ public class GameData {
     public void addAdvCleared(AdvancementDisplayType type) {
         advCleared.put(type, advCleared.get(type) + 1);
     }
+
+    public String getDisplayName() { return displayName; }
+    public void setDisplayName(String displayName) { this.displayName = displayName; }
 }

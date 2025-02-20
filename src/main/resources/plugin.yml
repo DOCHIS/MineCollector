@@ -2,6 +2,7 @@ name: MineCollector
 version: '${version}'
 main: com.doubledeltas.minecollector.MineCollector
 api-version: 1.19
+api: "1.19"
 prefix: Mcol
 authors: [ DoubleDeltas ]
 description: MineCollector plugin
@@ -26,3 +27,4 @@ commands:
   랭킹:
     aliases: [fodzld, ranking, rank]
     description: 수집 점수 랭킹을 봅니다.
+softdepend: [PlaceholderAPI, LuckPerms]

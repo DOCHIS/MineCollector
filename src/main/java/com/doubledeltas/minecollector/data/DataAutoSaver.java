@@ -18,6 +18,7 @@ public class DataAutoSaver {
         boolean isLogging = dbConfig.isAutosaveLogging();
         task = SCHEDULER.runTaskTimer(
                 MineCollector.getInstance(), () -> {
+                    System.out.println("Debug [DataAutoSaver.task] - Auto-saving data");
                     DataManager.saveAll();
                     if (isLogging) {
                         MessageUtil.log("데이터 자동 저장됨!");

@@ -20,7 +20,8 @@ fi
 echo -e "✅ ${GREEN}빌드 완료${NC}"
 
 # 대상 경로 설정
-TARGET_DIR="//192.168.0.200/minecraft/data/servers/agari_dev"
+TARGET_DIR="C:\Apps\agari_dev\plugins"
+# TARGET_DIR="//192.168.0.200/minecraft/data/servers/agari_dev"
 
 # build/libs 폴더에서 jar 파일 찾기
 JAR_FILE=$(find build/libs -name "MineCollector-*.jar" | head -n 1)

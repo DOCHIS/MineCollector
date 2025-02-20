@@ -48,7 +48,6 @@ public class GameDirector {
      * @param items 수집할 아이템들
      */
     public static void collect(Player player, Collection<ItemStack> items) {
-
         GameData data = DataManager.getData(player);
         for (ItemStack item: items) {
             if (item.getType() == Material.AIR && data.getCollection(Material.AIR) > 0)
@@ -70,6 +69,10 @@ public class GameDirector {
                 noticeLevelUp(player, item.getType(), i);
             }
         }
+        
+        // 디스플레이 이름 업데이트 및 데이터 저장
+        data.setDisplayName(player.getDisplayName());
+        DataManager.save(data);
     }
 
     /**
@@ -117,7 +120,7 @@ public class GameDirector {
                         .formatted(player.getName(), scoringConfig.getAdvancementScores().get(type), stats.getTotalScore())
         );
         for (Player p: announcementConfig.getAdvancement().resolve(player))
-            SoundUtil.playFirework(p);
+            SoundUtil.playGentleAlert(p);
     }
 
     /**
@@ -153,7 +156,7 @@ public class GameDirector {
         AnnouncementChapter announcementConfig = MineCollector.getInstance().getMcolConfig().getAnnouncement();
 
         MessageUtil.sendRaw(announcementConfig.getCollection(), target, new ComponentBuilder()
-                        .append(target.getName()).color(ChatColor.YELLOW)
+                        .append(target.getDisplayName()).color(ChatColor.YELLOW)
                         .append("님이 ").color(ChatColor.GREEN)
                         .append(GameDirector.getItemNameComponent(material)).color(ChatColor.YELLOW)
                         .append(" 아이템을 처음 수집했습니다!").color(ChatColor.GREEN)
@@ -195,7 +198,7 @@ public class GameDirector {
         itemNameComponent.setColor(ChatColor.YELLOW);
 
         MessageUtil.sendRaw(announcementConfig.getHighLevelReached(), target, new ComponentBuilder()
-                .append(target.getName()).color(ChatColor.YELLOW)
+                .append(target.getDisplayName()).color(ChatColor.YELLOW)
                 .append("님의 ").color(color).bold(isBold)
                 .append(new TranslatableComponent(material.getItemTranslationKey())).color(ChatColor.YELLOW).bold(isBold)
                 .append(" 컬렉션이 ").color(color).bold(isBold)
@@ -205,7 +208,7 @@ public class GameDirector {
         );
         if (level <= 8) {
             for (Player p: announcementConfig.getHighLevelReached().resolve(target))
-                SoundUtil.playHighFirework(p);
+                SoundUtil.playGentleAlert(p);
         }
         else {
             for (Player p: announcementConfig.getHighLevelReached().resolve(target))

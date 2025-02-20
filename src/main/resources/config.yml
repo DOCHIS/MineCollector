@@ -90,7 +90,7 @@ db:
 
   # 분 단위, 0 또는 양의 정수여야 함. 0일 경우 비활성화
   # in minutes, must be 0 or an positive integer, disabled if 0.
-  autosave period: 10
+  autosave period: 1
 
   # 자동 저장할 때 콘솔에 메시지를 출력할 지 설정합니다.
   # set "true" to log message to the console when auto-saved

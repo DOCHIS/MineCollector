@@ -19,6 +19,7 @@ public class SaveCommand extends CommandNode {
 
     @Override
     public boolean onRawCommand(CommandSender sender, Command command, String label, String[] args) {
+        System.out.println("Debug [SaveCommand.onRawCommand] - Manual save command executed");
         if (DataManager.saveAll()) {
             MessageUtil.send(sender, "게임 데이터 저장 완료!");
             if (sender instanceof Player player)
