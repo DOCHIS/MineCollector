@@ -102,22 +102,20 @@ public class MineCollectorExpansion extends PlaceholderExpansion {
         if (player == null) return "0";
 
         GameData data = DataManager.getData(player);
-        if (data == null) return "0";
-
-        GameStatistics stats = new GameStatistics(data);
+        GameStatistics stats = data != null ? new GameStatistics(data) : null;
 
         switch (identifier) {
             // 점수 관련 - 소수점 제거하고 정수로 반환
             case "total_score":
-                return String.valueOf((int) stats.getTotalScore());
+                return String.valueOf((int) (stats != null ? stats.getTotalScore() : 0));
             case "collection_score":
-                return String.valueOf((int) stats.getCollectionScore());
+                return String.valueOf((int) (stats != null ? stats.getCollectionScore() : 0));
             case "stack_score":
-                return String.valueOf((int) stats.getStackScore());
+                return String.valueOf((int) (stats != null ? stats.getStackScore() : 0));
             case "advancement_score":
-                return String.valueOf((int) stats.getAdvScore());
+                return String.valueOf((int) (stats != null ? stats.getAdvScore() : 0));
             case "collection_stack_score":  
-                return String.valueOf((int) (stats.getCollectionScore() + stats.getStackScore()));
+                return String.valueOf((int) (stats != null ? (stats.getCollectionScore() + stats.getStackScore()) : 0));
                 
             // 랭킹 관련
             case "total_rank": {
